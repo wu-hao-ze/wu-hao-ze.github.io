@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>＝长留~此生。- | ＝长留~此生。-</title><meta name="author" content="whz"><meta name="copyright" content="whz"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaScript 数据结构与算法（十四）图图的概念在计算机程序设计中，图也是一种非常常见的数据结构，图论其实是一个非常大的话题，在数学上起源于哥尼斯堡七桥问题。 什么是图？ 图是一种与树有些相似的数据结构。  实际上，在数学的概念上，树是图的一种。 我们知道树可以用来模拟很多现实的数据结构，比如：家谱&#x2F;公司组织架构等等。   那么图长什么样子呢？或者什么样的数据使用图来模拟更合适呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="＝长留~此生。-">
+<meta property="og:url" content="https://wu-hao-ze.github.io/2023/03/17/14_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E5%9B%BE/index.html">
+<meta property="og:site_name" content="＝长留~此生。-">
+<meta property="og:description" content="JavaScript 数据结构与算法（十四）图图的概念在计算机程序设计中，图也是一种非常常见的数据结构，图论其实是一个非常大的话题，在数学上起源于哥尼斯堡七桥问题。 什么是图？ 图是一种与树有些相似的数据结构。  实际上，在数学的概念上，树是图的一种。 我们知道树可以用来模拟很多现实的数据结构，比如：家谱&#x2F;公司组织架构等等。   那么图长什么样子呢？或者什么样的数据使用图来模拟更合适呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wu-hao-ze.github.io/img/avatar.png">
+<meta property="article:published_time" content="2023-03-17T10:12:41.111Z">
+<meta property="article:modified_time" content="2022-10-20T06:11:23.000Z">
+<meta property="article:author" content="whz">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wu-hao-ze.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wu-hao-ze.github.io/2023/03/17/14_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E5%9B%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '＝长留~此生。-',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-20 14:11:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default_top_img.png')"><nav id="nav"><span id="blog-info"><a href="/" title="＝长留~此生。-"><span class="site-name">＝长留~此生。-</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-17T10:12:41.111Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-20T06:11:23.000Z" title="更新于 2022-10-20 14:11:23">2022-10-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="JavaScript-数据结构与算法（十四）图"><a href="#JavaScript-数据结构与算法（十四）图" class="headerlink" title="JavaScript 数据结构与算法（十四）图"></a>JavaScript 数据结构与算法（十四）图</h1><h2 id="图的概念"><a href="#图的概念" class="headerlink" title="图的概念"></a>图的概念</h2><p>在计算机程序设计中，图也是一种非常常见的数据结构，图论其实是一个非常大的话题，在数学上起源于哥尼斯堡七桥问题。</p>
+<h3 id="什么是图？"><a href="#什么是图？" class="headerlink" title="什么是图？"></a>什么是图？</h3><ul>
+<li><p>图是一种与树有些相似的数据结构。</p>
+<ul>
+<li>实际上，在数学的概念上，树是图的一种。</li>
+<li>我们知道树可以用来模拟很多现实的数据结构，比如：家谱&#x2F;公司组织架构等等。</li>
+</ul>
+</li>
+<li><p>那么图长什么样子呢？或者什么样的数据使用图来模拟更合适呢？</p>
+<ul>
+<li><p>人与人之间的关系网<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.4cdhxz0ereu0.png" alt="image"></p>
+</li>
+<li><p>互联网中的网络关系<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.4ljxyy69a1s0.png" alt="image"></p>
+</li>
+<li><p>广州地铁图<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.46k2cvwmthw0.png" alt="image"></p>
+</li>
+</ul>
+</li>
+<li><p>那么，什么是图呢?</p>
+<ul>
+<li>我们会发现，上面的结点（其实图中叫顶点 Vertex）之间的关系，是不能使用树来表示（几叉树都不可以）。</li>
+<li>这个时候，我们就可以使用<strong>图</strong>来模拟它们。</li>
+</ul>
+</li>
+<li><p>图通常有什么特点呢？</p>
+<ul>
+<li>一组顶点：通常用 V (Vertex) 表示顶点的集合</li>
+<li>一组边：通常用 E (Edge) 表示边的集合</li>
+<li>边是顶点和顶点之间的连线</li>
+<li>边可以是有向的，也可以是无向的。（比如 A — B，通常表示无向。 A –&gt; B，通常表示有向）</li>
+</ul>
+</li>
+</ul>
+<h3 id="图的术语"><a href="#图的术语" class="headerlink" title="图的术语"></a>图的术语</h3><h4 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h4><ul>
+<li><p>我们在学习树的时候，树有很多的其他术语，了解这些术语有助于我们更深层次的理解图。</p>
+</li>
+<li><p>但是图的术语其实非常多，如果你找一本专门讲图的各个方面的书籍，会发现只是术语就可以占据一个章节。</p>
+</li>
+<li><p>这里，这里介绍几个比较常见的术语，某些术语后面用到的时候，再了解，没有用到的，不做赘述。</p>
+</li>
+<li><p>下面这是个抽象出来的图<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.rr153grdbc0.png" alt="image"></p>
+</li>
+<li><p>顶点</p>
+<ul>
+<li>顶点刚才我们已经介绍过了，表示图中的一个结点。</li>
+<li>比如地铁站中某个站&#x2F;多个村庄中的某个村庄&#x2F;互联网中的某台主机&#x2F;人际关系中的人。</li>
+</ul>
+</li>
+<li><p>边</p>
+<ul>
+<li>边表示顶点和顶点之间的连线。</li>
+<li>比如地铁站中两个站点之间的直接连线, 就是一个边。</li>
+<li>注意：这里的边不要叫做路径，路径有其他的概念，后面会区分。</li>
+</ul>
+</li>
+<li><p>相邻顶点</p>
+<ul>
+<li>由一条边连接在一起的顶点称为相邻顶点。</li>
+<li>比如 <code>0 - 1</code> 是相邻的，<code>0 - 3</code> 是相邻的。<code>0 - 2</code> 是不相邻的。</li>
+</ul>
+</li>
+<li><p>度</p>
+<ul>
+<li>一个顶点的度是相邻顶点的数量</li>
+<li>比如 0 顶点和其他两个顶点相连，0 顶点的度是 2</li>
+<li>比如 1 顶点和其他四个顶点相连，1 顶点的度是 4</li>
+</ul>
+</li>
+<li><p>路径</p>
+<ul>
+<li>路径是顶点 <code>v1</code>，<code>v2</code>…，<code>vn</code> 的一个连续序列, 比如上图中 <code>0 1 5 9</code> 就是一条路径。</li>
+<li>简单路径: 简单路径要求不包含重复的顶点. 比如 <code>0 1 5 9</code> 是一条简单路径。</li>
+<li>回路：第一个顶点和最后一个顶点相同的路径称为回路。比如 <code>0 1 5 6 3 0</code>。</li>
+</ul>
+</li>
+<li><p>无向图</p>
+<ul>
+<li>上面的图就是一张无向图，因为所有的边都没有方向。</li>
+<li>比如 <code>0 - 1</code> 之间有边，那么说明这条边可以保证 <code>0 -&gt; 1</code>，也可以保证 <code>1 -&gt; 0</code>。</li>
+</ul>
+</li>
+<li><p>有向图</p>
+<ul>
+<li>有向图表示的图中的边是有方向的。</li>
+<li>比如 <code>0 -&gt; 1</code>，不能保证一定可以 <code>1 -&gt; 0</code>，要根据方向来定。</li>
+</ul>
+</li>
+</ul>
+<h4 id="无权图和带权图"><a href="#无权图和带权图" class="headerlink" title="无权图和带权图"></a>无权图和带权图</h4><ul>
+<li><p>无权图</p>
+<ul>
+<li>我们上面的图就是一张无权图（边没有携带权重）</li>
+<li>我们上面的图中的边是没有任何意义的，不能收 <code>0 - 1</code> 的边，比 <code>4 - 9</code> 的边更远或者用的时间更长。</li>
+</ul>
+</li>
+<li><p>带权图</p>
+<ul>
+<li>带权图表示边有一定的权重</li>
+<li>这里的权重可以是任意你希望表示的数据：比如距离或者花费的时间或者票价。</li>
+<li>我们来看一张有向和带权的图<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.3q0nj5eq5p80.png" alt="image"></li>
+</ul>
+</li>
+</ul>
+<h3 id="现实建模"><a href="#现实建模" class="headerlink" title="现实建模"></a>现实建模</h3><ul>
+<li><p>对交通流量建模</p>
+<ul>
+<li>顶点可以表示街道的十字路口，边可以表示街道.。</li>
+<li>加权的边可以表示限速或者车道的数量或者街道的距离。</li>
+<li>建模人员可以用这个系统来判定最佳路线以及最可能堵车的街道。</li>
+</ul>
+</li>
+<li><p>对飞机航线建模</p>
+<ul>
+<li>航空公司可以用图来为其飞行系统建模。</li>
+<li>将每个机场看成顶点，将经过两个顶点的每条航线看作一条边。</li>
+<li>加权的边可以表示从一个机场到另一个机场的航班成本，或两个机场间的距离。</li>
+<li>建模人员可以利用这个系统有效的判断从一个城市到另一个城市的最小航行成本。<br>​</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、图的表示"><a href="#二、图的表示" class="headerlink" title="二、图的表示"></a>二、图的表示</h2><p>我们知道一个图包含很多顶点，另外包含顶点和顶点之间的连线（边），这两个都是非常重要的图信息，因此都需要在程序中体现出来。</p>
+<h3 id="顶点表示"><a href="#顶点表示" class="headerlink" title="顶点表示"></a>顶点表示</h3><ul>
+<li><p>顶点的表示相对简单</p>
+<ul>
+<li>上面的顶点，我们抽象成了 1 2 3 4，也可以抽象成 A B C D。在后面的案例中，我们使用 A B C D。</li>
+<li>那么这些 A B C D 我们可以使用一个数组来存储起来(存储所有的顶点)。</li>
+<li>当然，A B C D 有可能还表示其他含义的数据(比如村庄的名字)，这个时候，可以另外创建一个数组，用于存储对应的其他数据。</li>
+</ul>
+</li>
+<li><p>边的表示略微复杂</p>
+<ul>
+<li>因为边是两个顶点之间的关系，所以表示起来会稍微麻烦一些。</li>
+<li>下面是变常见的表示方式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><ul>
+<li><p>概述</p>
+<ul>
+<li>邻接矩阵让每个节点和一个整数向关联, 该整数作为数组的下标值.</li>
+<li>我们用一个二维数组来表示顶点之间的连接.</li>
+<li>演示<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.66y7l5b21nw0.png" alt="image"></li>
+</ul>
+</li>
+<li><p>图片解析</p>
+<ul>
+<li>在二维数组中，0 表示没有连线，1 表示有连线。</li>
+<li>通过二维数组，我们可以很快的找到一个顶点和哪些顶点有连线。（比如 A 顶点, 只需要 遍历第一行即可）</li>
+<li>另外，A - A，B - B（也就是顶点到自己的连线），通常使用 0 表示。</li>
+</ul>
+</li>
+<li><p>邻接矩阵的问题</p>
+<ul>
+<li><p>如果是一个无向图，邻接矩阵展示出来的二维数组，其实是一个对称图。</p>
+<ul>
+<li>也就是 A -&gt; D 是 1 的时候，对称的位置 D -&gt; 1 一定也是 1。</li>
+<li>那么这种情况下会造成空间的浪费，解决办法需自己去研究下。</li>
+</ul>
+</li>
+<li><p>邻接矩阵还有一个比较严重的问题就是如果图是一个稀疏图</p>
+<ul>
+<li>那么矩阵中将存在大量的 0，这意味着我们浪费了计算机存储空间来表示根本不存在的边。</li>
+<li>而且即使只有一个边，我们也必须遍历一行来找出这个边，也浪费很多时间。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><ul>
+<li><p>概述</p>
+<ul>
+<li>邻接表由图中每个顶点以及和顶点相邻的顶点列表组成。</li>
+<li>这个列表有很多中方式来存储：数组&#x2F;链表&#x2F;字典(哈希表)都可以。</li>
+<li>演示<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.3mu1hv8a84u0.png" alt="image"></li>
+</ul>
+</li>
+<li><p>图片解析</p>
+<ul>
+<li>其实图片比较容易理解</li>
+<li>比如我们要表示和 A 顶点有关联的顶点（边），A 和 B&#x2F;C&#x2F;D 有边，那么我们可以通过 A 找到 对应的数组&#x2F;链表&#x2F;字典，再取出其中的内容就可以啦。</li>
+</ul>
+</li>
+<li><p>邻接表的问题</p>
+<ul>
+<li>邻接表计算“出度”是比较简单的（出度：指向别人的数量, 入度: 指向自己的数量）</li>
+<li>邻接表如果需要计算有向图的“入度”，那么是一件非常麻烦的事情。</li>
+<li>它必须构造一个“逆邻接表”，才能有效的计算“入度”。而临街矩阵会非常简单。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、图的封装"><a href="#三、图的封装" class="headerlink" title="三、图的封装"></a>三、图的封装</h2><h3 id="创建图类"><a href="#创建图类" class="headerlink" title="创建图类"></a>创建图类</h3><ul>
+<li>先来创建 Graph 类，定义了两个属性：<ul>
+<li><code>vertexes</code> 用于存储所有的顶点，使用一个数组来保存。</li>
+<li><code>adjList</code> adj 是 adjoin 的缩写，邻接的意思。adjList 用于存储所有的边，这里采用邻接表的形式。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Graph</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">vertexes</span> = []; <span class="comment">// 存储顶点</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">adjList</span> = <span class="keyword">new</span> <span class="title class_">Dictionay</span>(); <span class="comment">//存储边信息</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加方法"><a href="#添加方法" class="headerlink" title="添加方法"></a>添加方法</h3><ul>
+<li>添加顶点：可以向图中添加一些顶点。<ul>
+<li>将添加的顶点放入到数组中。</li>
+<li>另外，给该顶点创建一个数组<code>[]</code>，该数组用于存储顶点连接的所有的边.（回顾邻接表的实现方式）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加顶点</span></span><br><span class="line"><span class="title function_">addVertex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="comment">// 添加点</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">vertexes</span>.<span class="title function_">push</span>(val)</span><br><span class="line">    <span class="comment">// 添加点的关系  采用邻接矩阵法 结构用Map</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">set</span>(val, [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加边：可以指定顶点和顶点之间的边。<ul>
+<li>添加边需要传入两个顶点，因为边是两个顶点之间的边，边不可能单独存在。</li>
+<li>根据顶点 v 取出对应的数组，将 w 加入到它的数组中。</li>
+<li>根据顶点 w 取出对应的数组，将 v 加入到它的数组中。</li>
+<li>因为这里实现的是无向图，所以边是可以双向的。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加边</span></span><br><span class="line"><span class="title function_">addEdge</span>(<span class="params">val1, val2</span>) &#123;</span><br><span class="line">    <span class="comment">// 添加边需要传入两个顶点, 因为边是两个顶点之间的边, 边不可能单独存在.</span></span><br><span class="line">    <span class="comment">// 这里实现的是无向图, 所以这里不考虑方向问题</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">get</span>(val1).<span class="title function_">push</span>(val2)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">get</span>(val2).<span class="title function_">push</span>(val1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>toString 方法：为了能够正确的显示图的结果，就是拿出二维数组的每一项。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出图结构</span></span><br><span class="line"><span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">vertexes</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        res += <span class="variable language_">this</span>.<span class="property">vertexes</span>[i] + <span class="string">&quot;-&gt;&quot;</span></span><br><span class="line">        <span class="keyword">let</span> adj = <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">get</span>(<span class="variable language_">this</span>.<span class="property">vertexes</span>[i])</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; adj.<span class="property">length</span>; j++) &#123;</span><br><span class="line">            res += adj[j] + <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        res += <span class="string">&quot;\n&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试代码</span></span><br><span class="line"><span class="keyword">let</span> graph = <span class="keyword">new</span> <span class="title class_">Graph</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加顶点</span></span><br><span class="line"><span class="keyword">let</span> myVertexes = [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>, <span class="string">&quot;F&quot;</span>, <span class="string">&quot;G&quot;</span>, <span class="string">&quot;H&quot;</span>, <span class="string">&quot;I&quot;</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; myVertexes.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  graph.<span class="title function_">addVertex</span>(myVertexes[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加边</span></span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;C&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;D&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;C&quot;</span>, <span class="string">&quot;G&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;D&quot;</span>, <span class="string">&quot;G&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;D&quot;</span>, <span class="string">&quot;H&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;B&quot;</span>, <span class="string">&quot;E&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;B&quot;</span>, <span class="string">&quot;F&quot;</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="string">&quot;E&quot;</span>, <span class="string">&quot;I&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、图的遍历"><a href="#四、图的遍历" class="headerlink" title="四、图的遍历"></a>四、图的遍历</h2><p>和其他数据结构一样，需要通过某种算法来遍历图结构中每一个数据。这样可以保证，在我们需要时，通过这种算法来访问某个顶点的数据以及它对应的边。</p>
+<h3 id="遍历的方式"><a href="#遍历的方式" class="headerlink" title="遍历的方式"></a>遍历的方式</h3><ul>
+<li><p>图的遍历思想<br>图的遍历算法的思想在于必须访问每个第一次访问的节点，并且追踪有哪些顶点还没有被访问到。</p>
+</li>
+<li><p>有两种算法可以对图进行遍历</p>
+<ul>
+<li>广度优先搜索(Breadth-First Search, 简称 BFS)</li>
+<li>深度优先搜索(Depth-First Search, 简称 DFS)</li>
+<li>两种遍历算法，都需要明确指定第一个被访问的顶点。</li>
+</ul>
+</li>
+<li><p>遍历的注意点</p>
+<ul>
+<li>完全探索一个顶点要求我们便查看该顶点的每一条边。</li>
+<li>对于每一条所连接的没有被访问过的顶点，将其标注为被发现的，并将其加进待访问顶点列表中。</li>
+<li>为了保证算法的效率：每个顶点至多访问两次。</li>
+</ul>
+</li>
+<li><p>两种算法的思想</p>
+<ul>
+<li>BFS 基于队列，入队列的顶点先被探索。</li>
+<li>DFS 基于栈，通过将顶点存入栈中，顶点是沿着路径被探索的，存在新的相邻顶点就去访问。</li>
+</ul>
+</li>
+<li><p>为了记录顶点是否被访问过，我们使用三种颜色来反应它们的状态。(或者两种颜色也可以)</p>
+<ul>
+<li><strong>白色</strong>表示该顶点还没有被访问.</li>
+<li><strong>灰色</strong>表示该顶点被访问过, 但并未被探索过.</li>
+<li><strong>黑色</strong>表示该顶点被访问过且被完全探索过.</li>
+<li>初始化颜色代码</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化顶点的颜色</span></span><br><span class="line"><span class="title function_">_initializeColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 白色: 表示该顶点还没有被访问.</span></span><br><span class="line">    <span class="comment">// 灰色: 表示该顶点被访问过, 但并未被探索过.</span></span><br><span class="line">    <span class="comment">// 黑色: 表示该顶点被访问过且被完全探索过.</span></span><br><span class="line">    <span class="keyword">let</span> colors = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">vertexes</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        colors[<span class="variable language_">this</span>.<span class="property">vertexes</span>[i]] = <span class="string">&quot;white&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> colors</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="广度优先搜索-BFS"><a href="#广度优先搜索-BFS" class="headerlink" title="广度优先搜索(BFS)"></a>广度优先搜索(BFS)</h3><ul>
+<li><p>广度优先搜索算法的思路<br>广度优先算法会从指定的第一个顶点开始遍历图，先访问其所有的相邻点，就像一次访问图的一层。换句话说，就是先宽后深的访问顶点。</p>
+</li>
+<li><p>图解 BFS<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.3vz7fx7tgvs0.png" alt="image"></p>
+</li>
+<li><p>广度优先搜索的实现</p>
+<ol>
+<li>创建一个队列 Q</li>
+<li>将 v 标注为被发现的(灰色), 并将 v 将入队列 Q</li>
+<li>如果 Q 非空, 执行下面的步骤：<ul>
+<li>将 v 从 Q 中取出队列</li>
+<li>将 v 标注为被发现的灰色</li>
+<li>将 v 所有的未被访问过的邻接点（白色），加入到队列中</li>
+<li>将 v 标志为黑色</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>广度优先搜索的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 广度优先搜索</span></span><br><span class="line"><span class="title function_">bfs</span>(<span class="params">handle</span>) &#123;</span><br><span class="line">    <span class="comment">// 1.初始化颜色</span></span><br><span class="line">    <span class="keyword">let</span> color = <span class="variable language_">this</span>.<span class="title function_">_initializeColor</span>()</span><br><span class="line">    <span class="comment">// 2. 创建队列</span></span><br><span class="line">    <span class="keyword">let</span> queue = <span class="keyword">new</span> <span class="title class_">Queue</span></span><br><span class="line">    <span class="comment">// 3. 将传入的顶点放入队列</span></span><br><span class="line">    queue.<span class="title function_">enqueue</span>(<span class="variable language_">this</span>.<span class="property">vertexes</span>[<span class="number">0</span>])</span><br><span class="line">    <span class="comment">// 4.依赖队列操作数据   队列不为空时一直持续</span></span><br><span class="line">    <span class="keyword">while</span> (!queue.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        <span class="comment">// 4.1 拿到队头</span></span><br><span class="line">        <span class="keyword">let</span> qVal = queue.<span class="title function_">dequeue</span>()</span><br><span class="line">        <span class="comment">//  4.2 拿到队头所关联（相连）的点并设置为访问中状态（灰色）</span></span><br><span class="line">        <span class="keyword">let</span> qAdj = <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">get</span>(qVal)</span><br><span class="line">        color[qVal] = <span class="string">&quot;gray&quot;</span></span><br><span class="line">        <span class="comment">// 4.3 将队头关联的点添加到队尾</span></span><br><span class="line">        <span class="comment">// 这一步是完成bfs的关键，依赖队列的先进先出的特点。</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; qAdj.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = qAdj[i]</span><br><span class="line">            <span class="keyword">if</span> (color[a] === <span class="string">&quot;white&quot;</span>) &#123;</span><br><span class="line">                color[a] = <span class="string">&quot;gray&quot;</span></span><br><span class="line">                queue.<span class="title function_">enqueue</span>(a)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 4.5设置访问完的点为黑色。</span></span><br><span class="line">        color[qVal] = <span class="string">&quot;black&quot;</span></span><br><span class="line">        <span class="keyword">if</span> (handle) [</span><br><span class="line">            <span class="title function_">handle</span>(qVal)</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用广度优先算法</span></span><br><span class="line"><span class="keyword">let</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">graph.<span class="title function_">bfs</span>(graph.<span class="property">vertexes</span>[<span class="number">0</span>], <span class="keyword">function</span> (<span class="params">v</span>) &#123;</span><br><span class="line">  result += v + <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// A B C D E F G H I</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="深度优先搜索-DFS"><a href="#深度优先搜索-DFS" class="headerlink" title="深度优先搜索(DFS)"></a>深度优先搜索(DFS)</h3><p>深度优先搜索的思路：</p>
+<ul>
+<li>深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径知道这条路径最后被访问了。</li>
+<li>接着原路回退并探索下一条路径。</li>
+<li>图解 DFS<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.1bjimck65r8g.png" alt="image"></li>
+</ul>
+<p>深度优先搜索算法的实现：</p>
+<ul>
+<li><p>广度优先搜索算法我们使用的是队列，这里可以使用栈完成，也可以使用递归。</p>
+</li>
+<li><p>方便代码书写，我们还是使用递归(递归本质上就是函数栈的调用)</p>
+</li>
+<li><p>深度优先搜索算法的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深度优先搜索</span></span><br><span class="line"><span class="title function_">dfs</span>(<span class="params">handle</span>) &#123;</span><br><span class="line">    <span class="comment">// 1.初始化颜色</span></span><br><span class="line">    <span class="keyword">let</span> color = <span class="variable language_">this</span>.<span class="title function_">_initializeColor</span>()</span><br><span class="line">    <span class="comment">// 2. 遍历所有顶点，开始访问</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">vertexes</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (color[<span class="variable language_">this</span>.<span class="property">vertexes</span>[i]] === <span class="string">&quot;white&quot;</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">_dfsVisit</span>(<span class="variable language_">this</span>.<span class="property">vertexes</span>[i], color, handle)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// dfs的递归方法  这里直接使用函数的调用栈</span></span><br><span class="line"><span class="title function_">_dfsVisit</span>(<span class="params">val, color, handle</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 将颜色设置为访问中</span></span><br><span class="line">    color[val] = <span class="string">&quot;gray&quot;</span></span><br><span class="line">    <span class="comment">// 2. 执行相应的回调</span></span><br><span class="line">    <span class="keyword">if</span> (handle) &#123;</span><br><span class="line">        <span class="title function_">handle</span>(val)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 拿与该点相邻的点，对每个点操作</span></span><br><span class="line">    <span class="keyword">let</span> adj = <span class="variable language_">this</span>.<span class="property">adjList</span>.<span class="title function_">get</span>(val)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; adj.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> w = adj[i]</span><br><span class="line">        <span class="comment">// 如果相邻点未未访问状态，开始访问。</span></span><br><span class="line">        <span class="keyword">if</span> (color[w] === <span class="string">&quot;white&quot;</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">_dfsVisit</span>(w, color, handle)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 4. 处理完后设置为访问过点。</span></span><br><span class="line">    color[val] = <span class="string">&quot;black&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用深度优先算法</span></span><br><span class="line">result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">graph.<span class="title function_">dfs</span>(<span class="keyword">function</span> (<span class="params">v</span>) &#123;</span><br><span class="line">  result += v + <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 输出深度优先</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">//A B E I F C D G H</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>递归的代码较难理解一些，这副图来帮助理解过程：<br><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image.6z6nkgmevxo0.png" alt="image"></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://wu-hao-ze.github.io">whz</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://wu-hao-ze.github.io/2023/03/17/14_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E5%9B%BE/">https://wu-hao-ze.github.io/2023/03/17/14_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E5%9B%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wu-hao-ze.github.io" target="_blank">＝长留~此生。-</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/03/17/01_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E5%89%8D%E8%A8%80/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">whz</div><div class="author-info__description">回忆中的情景在你的心中绽放，感动了每一个春秋</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wu-hao-ze"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wu-hao-ze" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=3367403241&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3367403241@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">JavaScript 数据结构与算法（十四）图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">图的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%BE%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是图？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.2.</span> <span class="toc-text">图的术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">术语</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E6%9D%83%E5%9B%BE%E5%92%8C%E5%B8%A6%E6%9D%83%E5%9B%BE"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">无权图和带权图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E5%AE%9E%E5%BB%BA%E6%A8%A1"><span class="toc-number">1.1.3.</span> <span class="toc-text">现实建模</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">二、图的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B6%E7%82%B9%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">顶点表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="toc-number">1.2.2.</span> <span class="toc-text">邻接矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">邻接表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%BE%E7%9A%84%E5%B0%81%E8%A3%85"><span class="toc-number">1.3.</span> <span class="toc-text">三、图的封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9B%BE%E7%B1%BB"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建图类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">添加方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">测试代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">1.4.</span> <span class="toc-text">四、图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">遍历的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2-BFS"><span class="toc-number">1.4.2.</span> <span class="toc-text">广度优先搜索(BFS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2-DFS"><span class="toc-number">1.4.3.</span> <span class="toc-text">深度优先搜索(DFS)</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/13_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="无题">无题</a><time datetime="2023-03-17T10:12:41.138Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/12_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E4%BA%8C%E5%8F%89%E6%A0%91/" title="无题">无题</a><time datetime="2023-03-17T10:12:41.136Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/11_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E6%A0%91/" title="无题">无题</a><time datetime="2023-03-17T10:12:41.135Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/10_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E5%8D%81%EF%BC%89%E5%93%88%E5%B8%8C%E8%A1%A8/" title="无题">无题</a><time datetime="2023-03-17T10:12:41.133Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/09_JavaScript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%88%E4%B9%9D%EF%BC%89%E5%AD%97%E5%85%B8/" title="无题">无题</a><time datetime="2023-03-17T10:12:41.131Z" title="发表于 2023-03-17 18:12:41">2023-03-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By whz</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
